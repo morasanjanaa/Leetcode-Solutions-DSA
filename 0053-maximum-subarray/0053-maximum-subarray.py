@@ -3,10 +3,7 @@ class Solution:
         cur_sum = 0 
         max_sum = nums[0]
         for i in range(0,len(nums)):
-            if cur_sum < 0:
-                cur_sum = 0
-            cur_sum += nums[i]
-            max_sum = max(cur_sum,max_sum)
-            
+            cur_sum = max(nums[i],nums[i]+cur_sum)
+            max_sum = max(cur_sum,max_sum)   
         return max_sum
         

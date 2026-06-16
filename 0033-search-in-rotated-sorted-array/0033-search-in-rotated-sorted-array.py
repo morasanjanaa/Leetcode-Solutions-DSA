@@ -1,28 +1,19 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        def findPivot(nums):
-            left, right = 0, len(nums) - 1
-            while left < right:
-                mid = (left + right) // 2
-                if nums[mid] > nums[right]:
-                    left = mid + 1
+         low = 0
+         high = len(nums)-1
+         while(low<=high):
+            mid = (low+high)//2
+            if(nums[mid]==target):
+                return mid
+            elif(nums[mid]<=nums[high]):
+                if(nums[mid]<=target and target<=nums[high]):
+                    low = mid+1
                 else:
-                    right = mid
-            return left
-
-        def binarySearch(left, right):
-            while left <= right:
-                mid = (left + right) // 2
-                if nums[mid] == target:
-                    return mid
-                elif nums[mid] < target:
-                    left = mid + 1
+                    high = mid-1
+            else:
+                if(nums[low]<=target and target<=nums[mid]):
+                    high = mid-1
                 else:
-                    right = mid - 1
-            return -1
-
-        pivot = findPivot(nums)
-        ans = binarySearch(0, pivot - 1)
-        if ans != -1:
-            return ans
-        return binarySearch(pivot, len(nums) - 1)
+                    low = mid+1
+         return -1

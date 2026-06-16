@@ -6,9 +6,9 @@ class Solution:
        while(low<=high):
         mid = (low+high)//2
         #left greater
-        if(mid>0 and nums[mid]<nums[mid-1]):
+        if(mid>0 and nums[mid-1] > nums[mid]):
             high = mid-1
-        elif(mid<size-1 and nums[mid]<nums[mid+1]):
+        elif(mid<size-1 and nums[mid+1] > nums[mid]):
             low = mid+1
         else:
             return mid

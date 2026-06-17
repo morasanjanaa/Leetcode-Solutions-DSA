@@ -1,17 +1,20 @@
-class Solution:
-    def solve(self,nums,i,dp):
-        # Recursion + Memorization
-        if i >= len(nums):
-            return 0
-        if dp[i] != -1:
-            return dp[i]
-        steal = nums[i] + self.solve(nums,i+2,dp)
-        skip = self.solve(nums,i+1,dp)
-        dp[i] = max(steal,skip)
-        return dp[i]
+class Solution:  
     def rob(self, nums: List[int]) -> int:
-        dp = [-1] * len(nums)
-        return self.solve(nums,0,dp)
+        # Bottom Up Solution
+        n = len(nums)
+        dp = [-1] * (n+1)
+        dp[0] = 0
+        dp[1] = nums[0]
+        for i in range(2,n+1):
+            if i-2 > 0:
+                steal = nums[i-1] + dp[i-2]
+            else:
+                steal = nums[i-1]
+            skip = dp[i-1]
+            dp[i] = max(skip,steal)
+        return dp[n]
+
+
     
 
 

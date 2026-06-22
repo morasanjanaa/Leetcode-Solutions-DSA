@@ -1,5 +1,38 @@
 class Solution:  
     def rob(self, nums: List[int]) -> int:
+        # Recursion + memorization
+        def solve(i,dp):
+            if i >= len(nums):
+                return 0
+            if dp[i]!=-1:
+                return dp[i]
+            skip = solve(i+1,dp)
+            take = nums[i] + solve(i+2,dp)
+            dp[i] = max(skip,take)
+            return max(skip,take)
+        dp = [-1]*len(nums)
+        return solve(0,dp)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        '''
         #Constant space
         n = len(nums)
         prevprev = 0
@@ -14,6 +47,7 @@ class Solution:
             prevprev = prev
             prev = temp
         return prev
+        '''
 
         
 

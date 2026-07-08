@@ -3,25 +3,30 @@ from typing import List
 
 class Solution:
     def minSpeedOnTime(self, dist: List[int], hour: float) -> int:
-        left, right = 1, 10**7
-        res = -1
+        n = len(dist) - 1
+        
+        if hour <= n:
+            return -1
 
-        while left <= right:
-            mid = (left + right) // 2
+        low = 1
+        high = 10**7
+        ans = -1
 
-            total_time = 0
+        while low <= high:
 
-            # First n-1 trains (must wait for the next integer hour)
-            for i in range(len(dist) - 1):
-                total_time += ceil(dist[i] / mid)
+            mid = (low + high) // 2
 
-            # Last train (no waiting after it)
-            total_time += dist[-1] / mid
+            time = 0
 
-            if total_time <= hour:
-                res = mid
-                right = mid - 1
+            for i in range(n):
+                time += ceil(dist[i] / mid)
+
+            time += dist[-1] / mid
+
+            if time <= hour:
+                ans = mid
+                high = mid - 1
             else:
-                left = mid + 1
+                low = mid + 1
 
-        return res
+        return ans

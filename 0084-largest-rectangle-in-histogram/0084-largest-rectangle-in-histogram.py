@@ -1,7 +1,42 @@
 from typing import List
 
 class Solution:
-    def largestRectangleArea(self, heights: List[int]) -> int:
+    def largestRectangleArea(self, h: List[int]) -> int:
+      from typing import List
+
+class Solution:
+    def largestRectangleArea(self, h: List[int]) -> int:
+        max_area = 0
+        stack = []
+
+        for i in range(len(h)):
+            while stack and h[stack[-1]] > h[i]:
+                element = h[stack.pop()]
+                nse = i
+
+                if stack:
+                    pse = stack[-1]
+                else:
+                    pse = -1
+
+                max_area = max(max_area, element * (nse - pse - 1))
+
+            stack.append(i)   # <-- Missing in your code
+
+        while stack:
+            element = h[stack.pop()]
+            nse = len(h)
+
+            if stack:
+                pse = stack[-1]
+            else:
+                pse = -1
+
+            max_area = max(max_area, element * (nse - pse - 1))
+
+        return max_area
+
+        '''
         def previousSmallest(h):
             pse = [-1]*len(h)
             stack = []
@@ -34,5 +69,6 @@ class Solution:
             ans = max(ans, area)
 
         return ans
+        '''
             
 

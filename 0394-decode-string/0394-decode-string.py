@@ -8,7 +8,7 @@ class Solution:
         for i in s:
 
             if i.isdigit():
-                cur_num = cur_num * 10 + int(i)
+                cur_num = int(i)
 
             elif i == "[":
                 num_stack.append(cur_num)

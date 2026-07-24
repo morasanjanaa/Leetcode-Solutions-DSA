@@ -1,18 +1,21 @@
 class Solution:
-    def sortColors(self, nums: List[int]) -> None:
+    def sortColors(self, arr: List[int]) -> None:
+        # Dutch Flag Algorithm
         low = 0
+        high = len(arr)-1
         mid = 0
-        high = len(nums) - 1
 
         while mid <= high:
-            if nums[mid] == 0:
-                nums[low], nums[mid] = nums[mid], nums[low]
+            
+            if arr[mid] == 0:
+                arr[low],arr[mid] = arr[mid],arr[low]
+                mid += 1
                 low += 1
+
+            elif arr[mid] == 1:
                 mid += 1
 
-            elif nums[mid] == 1:
-                mid += 1
-
-            else:  # nums[mid] == 2
-                nums[mid], nums[high] = nums[high], nums[mid]
+            else:
+                arr[high],arr[mid] = arr[mid],arr[high]
                 high -= 1
+

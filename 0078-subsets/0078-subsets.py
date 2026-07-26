@@ -2,20 +2,13 @@ class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         res = []
 
-        def givesubsets(i, ans):
+        def dfs(i, curr):
             if i == len(nums):
-                res.append(ans[:])   # store a copy
+                res.append(curr)
                 return
 
-            # Pick
-            ans.append(nums[i])
-            givesubsets(i + 1, ans)
+            dfs(i + 1, curr + [nums[i]])  # Pick
+            dfs(i + 1, curr)              # Don't Pick
 
-            # Backtrack
-            ans.pop()
-
-            # Don't pick
-            givesubsets(i + 1, ans)
-
-        givesubsets(0, [])
+        dfs(0, [])
         return res

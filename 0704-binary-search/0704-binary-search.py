@@ -1,16 +1,20 @@
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
+    def search(self, arr: List[int], target: int) -> int:
         # Recursive Aproach Practice
-        def find(i,target):
-            if i == len(nums):
-                return -1
+        def find(low,high,target):
+            if low  > high:
+                 return -1
 
-            if nums[i] == target:
-                return i
+            mid = (low + high) // 2
 
-            return find(i+1,target)
-
-        return find(0,target)
+            if arr[mid] == target:
+                return mid
+            elif target < arr[mid]:
+                return find(low,mid-1,target)
+            else:
+                return find(mid + 1,high,target)
+        
+        return find(0,len(arr)-1,target)
 
 
         '''

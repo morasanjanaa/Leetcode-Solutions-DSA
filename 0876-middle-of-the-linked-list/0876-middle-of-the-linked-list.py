@@ -22,7 +22,7 @@ class Solution:
                 slow = slow.next
                 fast = fast.next.next
         else:
-            while(fast.next):
+            while(fast and fast.next):
                 slow = slow.next
                 fast = fast.next.next
                 

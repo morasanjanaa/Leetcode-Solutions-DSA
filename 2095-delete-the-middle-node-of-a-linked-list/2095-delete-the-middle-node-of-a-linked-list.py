@@ -4,25 +4,30 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def deleteMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def deleteMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]: 
+        # Calculate the size for of LL
         size = 0
         temp = head
         while temp:
             size += 1
             temp = temp.next
-
-        temp = head
-
         if size == 1:
             return None
-        
-        move = (size//2)
+        slow = head
+        fast = head
 
-        for _ in range(move-1):
-            temp = temp.next
-        
-        temp.next = temp.next.next
+        # Even Case
+        if size % 2 == 0:
+            while(fast.next.next != None):
+                slow = slow.next
+                fast = fast.next.next
+        # Odd Case
+        else:
+            while(fast.next.next.next != None):
+                slow = slow.next
+                fast = fast.next.next
+
+        slow.next = slow.next.next
 
         return head
-
         
